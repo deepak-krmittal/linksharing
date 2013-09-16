@@ -96,27 +96,27 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.subscriptions}">
-				<li class="fieldcontain">
-					<span id="subscriptions-label" class="property-label"><g:message code="user.subscriptions.label" default="Subscriptions" /></span>
-					
-						<g:each in="${userInstance.subscriptions}" var="s">
-						<span class="property-value" aria-labelledby="subscriptions-label"><g:link controller="subscription" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				%{--<g:if test="${userInstance?.subscriptions}">--}%
+				%{--<li class="fieldcontain">--}%
+					%{--<span id="subscriptions-label" class="property-label"><g:message code="user.subscriptions.label" default="Subscriptions" /></span>--}%
+					%{----}%
+						%{--<g:each in="${userInstance.subscriptions}" var="s">--}%
+						%{--<span class="property-value" aria-labelledby="subscriptions-label"><g:link controller="subscription" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>--}%
+						%{--</g:each>--}%
+					%{----}%
+				%{--</li>--}%
+				%{--</g:if>--}%
 			
-				<g:if test="${userInstance?.topics}">
-				<li class="fieldcontain">
-					<span id="topics-label" class="property-label"><g:message code="user.topics.label" default="Topics" /></span>
-					
-						<g:each in="${userInstance.topics}" var="t">
-						<span class="property-value" aria-labelledby="topics-label"><g:link controller="topic" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				%{--<g:if test="${userInstance?.topics}">--}%
+				%{--<li class="fieldcontain">--}%
+					%{--<span id="topics-label" class="property-label"><g:message code="user.topics.label" default="Topics" /></span>--}%
+					%{----}%
+						%{--<g:each in="${userInstance.topics}" var="t">--}%
+						%{--<span class="property-value" aria-labelledby="topics-label"><g:link controller="topic" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>--}%
+						%{--</g:each>--}%
+					%{----}%
+				%{--</li>--}%
+				%{--</g:if>--}%
 			
 			</ol>
 			<g:form>

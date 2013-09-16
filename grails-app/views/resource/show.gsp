@@ -11,9 +11,9 @@
 		<a href="#show-resource" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="home" controller="user" action="dashBoard"><g:message code="default.home.label"/></g:link></li>
+				%{--<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>--}%
+				%{--<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>--}%
 			</ul>
 		</div>
 		<div id="show-resource" class="content scaffold-show" role="main">
@@ -69,32 +69,63 @@
 					
 				</li>
 				</g:if>
+
+                <g:if test="${resourceInstance.instanceOf(org.ig.DocumentResource)}">
+                    <li class="fieldcontain">
+                        <span id="summary-type" class="property-label">Type</span>
+
+                        <span class="property-value" aria-labelledby="summary-label">Document Resource </span>
+
+                    </li>
+                    <li class="fieldcontain">
+                        <span id="summary-url" class="property-label">Document</span>
+
+                        <span class="property-value" aria-labelledby="summary-label"><g:fieldValue bean="${resourceInstance}" field="fileName"/></span>
+
+                    </li>
+                </g:if>
+                <g:else>
+                    <li class="fieldcontain">
+                        <span id="summary-type" class="property-label">Type</span>
+
+                        <span class="property-value" aria-labelledby="summary-label">Link Resource </span>
+
+                    </li>
+                    <li class="fieldcontain">
+                        <span id="summary-url" class="property-label">URL</span>
+
+                        <span class="property-value" aria-labelledby="summary-label"><g:fieldValue bean="${resourceInstance}" field="url"/></span>
+
+                    </li>
+                </g:else>
+
+				%{--<g:if test="${resourceInstance?.owner}">--}%
+				%{--<li class="fieldcontain">--}%
+					%{--<span id="resourceOwner-label" class="property-label"><g:message code="resource.resourceOwner.label" default="Resource Owner" /></span>--}%
+					%{----}%
+						%{--<span class="property-value" aria-labelledby="resourceOwner-label"><g:link controller="user" action="show" id="${resourceInstance?.owner?.id}">${resourceInstance?.owner?.encodeAsHTML()}</g:link></span>--}%
+					%{----}%
+				%{--</li>--}%
+				%{--</g:if>--}%
 			
-				<g:if test="${resourceInstance?.resourceOwner}">
-				<li class="fieldcontain">
-					<span id="resourceOwner-label" class="property-label"><g:message code="resource.resourceOwner.label" default="Resource Owner" /></span>
-					
-						<span class="property-value" aria-labelledby="resourceOwner-label"><g:link controller="user" action="show" id="${resourceInstance?.resourceOwner?.id}">${resourceInstance?.resourceOwner?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${resourceInstance?.topic}">
-				<li class="fieldcontain">
-					<span id="topic-label" class="property-label"><g:message code="resource.topic.label" default="Topic" /></span>
-					
-						<span class="property-value" aria-labelledby="topic-label"><g:link controller="topic" action="show" id="${resourceInstance?.topic?.id}">${resourceInstance?.topic?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
+				%{--<g:if test="${resourceInstance?.topic}">--}%
+				%{--<li class="fieldcontain">--}%
+					%{--<span id="topic-label" class="property-label"><g:message code="resource.topic.label" default="Topic" /></span>--}%
+					%{----}%
+						%{--<span class="property-value" aria-labelledby="topic-label"><g:link controller="topic" action="show" id="${resourceInstance?.topic?.id}">${resourceInstance?.topic?.encodeAsHTML()}</g:link></span>--}%
+					%{----}%
+				%{--</li>--}%
+				%{--</g:if>--}%
 			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${resourceInstance?.id}" />
 					<g:link class="edit" action="edit" id="${resourceInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+                    <g:if test="${resourceInstance.owner.equals(session.user.id)}">
+                    <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    </g:if>
+            </fieldset>
 			</g:form>
 		</div>
 	</body>

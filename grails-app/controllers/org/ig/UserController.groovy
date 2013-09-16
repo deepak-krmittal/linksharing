@@ -14,6 +14,7 @@ class UserController {
         def subscription = Subscription.createCriteria().list {
             projections{
                 topic{
+                    property("id")
                     property("name")
                     property("content")
                     property("visibility")

@@ -123,10 +123,11 @@
 				</g:if>
             </ol>
             <h1>Available Resources</h1>
+            %{--${availRes}--}%
             <g:each in="${availRes}" var="item">
                 <div class="outer_div">
                 <span class="title">
-                <g:link>${item.title}</g:link>
+                <g:link controller="resource" action="show" id="${item.id}">${item.title}</g:link>
                 </span> <br>
                 </div>
             </g:each>

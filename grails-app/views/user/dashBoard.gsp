@@ -49,7 +49,12 @@
                             <g:each in="${subs}">
                             <%
                             List l = it;
-                            out.println("<h1>"+l.get(0)+"</h1><br>"+l.get(1)+"<hr>")
+                            %>
+                                <g:link controller="topic" action="show" id="${l.get(0)}">${l.get(1)}</g:link>
+                                <br>
+                                <span>${l.get(2)}</span>
+                            <%
+
                             %>
                             </g:each>
                         </p>

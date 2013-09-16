@@ -108,5 +108,8 @@ class AuthenticationController {
         render ("Welcome to user page")
     }
 
-
+     def invalidLogin(){
+         flash.message = 'Login is mandatory'
+         render (view: '../login')
+     }
 }

@@ -19,6 +19,9 @@
             <td>
                 <table>
                     <tr>
+                        <td colspan="2">${flash.message}</td>
+                    </tr>
+                    <tr>
                         <td>Enter Email</td>
                         <td>Password</td>
                     </tr>

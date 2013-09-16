@@ -31,14 +31,23 @@ class ResourceController {
     }
 
     def show(Long id) {
-        def resourceInstance = Resource.get(id)
-        if (!resourceInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'resource.label', default: 'Resource'), id])
-            redirect(action: "list")
-            return
+        Resource r = Resource.get(id)
+        if (r instanceof DocumentResource){
+            DocumentResource documentResource = DocumentResource.get(id)
+            [resourceInstance:documentResource]
+        }else{
+            LinkResource linkResource = LinkResource.get(id)
+            [resourceInstance:linkResource]
         }
-
-        [resourceInstance: resourceInstance]
+//          render r.class
+//        def resourceInstance = Resource.get(id)
+//        if (!resourceInstance) {
+//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'resource.label', default: 'Resource'), id])
+//            redirect(action: "list")
+//            return
+//        }
+//
+//        [resourceInstance: resourceInstance]
     }
 
     def edit(Long id) {
@@ -122,14 +131,16 @@ class ResourceController {
         if(params.resource.equals("link")){
             r = new LinkResource(title: params.title, summary: params.summary, owner: User.load(session.user.id), url: params.url, topic: Topic.load(params.topic))
             r.save(failOnError: true)
-            render "Resource added";
+//            render "Resource added";
         }else{
             def upload = request.getFile("uploadFile")
 //            render "File Name: ${upload.originalFilename} Type: ${upload.contentType}"
             upload.transferTo(new File("doc/${upload.originalFilename}"))
             r = new DocumentResource(title: params.title, summary: params.summary, owner: User.load(session.user.id), topic: Topic.load(params.topic), fileName: upload.originalFilename, contentType: upload.contentType)
             r.save(failOnError: true)
-            render "Document uploaded succsessfully"
+//            render "Document uploaded succsessfully"
         }
+        flash.id=params.topic
+        redirect(controller: 'topic', action: 'show')
     }
 }
