@@ -55,6 +55,7 @@
                         <g:message code="default.show.label" args="[entityName]" />
                         <g:hiddenField name="unSubId" value="${subscribed.id}"></g:hiddenField>
                         <g:submitButton name="unsubscribe" value="unsubscribe"></g:submitButton>
+                        <button id="send_invite">Send Invitation</button>
                     </g:form>
 
                 </g:else>

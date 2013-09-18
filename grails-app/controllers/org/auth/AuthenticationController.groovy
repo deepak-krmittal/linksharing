@@ -79,7 +79,7 @@ class AuthenticationController {
         if(user != null){
             session.user = user
             session.isLogin = true
-            if(user.email.equals("arpit.singhal@intelligrape.com")){
+            if(user.email.equals("dkmittal221@gmail11.com")){
                 session.isAdmin = true
                 redirect(controller: 'user' , action: 'adminDash')
             } else{

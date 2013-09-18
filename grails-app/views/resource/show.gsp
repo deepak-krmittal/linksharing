@@ -65,7 +65,9 @@
 					
 						<g:each in="${resourceInstance.readingItems}" var="r">
 						<span class="property-value" aria-labelledby="readingItems-label"><g:link controller="readingItem" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
+						${r.isFavourite}
+                        ${r.isRead}
+                        </g:each>
 					
 				</li>
 				</g:if>
@@ -127,6 +129,12 @@
                     </g:if>
             </fieldset>
 			</g:form>
+            <g:form controller="readingItem" action="editOrCreate">
+                <g:hiddenField name="id" value="${resourceInstance?.id}" />
+                <g:checkBox name="isFavourite" value="true"></g:checkBox> Is Favourite
+                <g:checkBox name="isRead" value="true"></g:checkBox> Is Read
+                <g:submitButton name="Update" value="Update"></g:submitButton>
+            </g:form>
 		</div>
 	</body>
 </html>

@@ -53,16 +53,13 @@
                                 <g:link controller="topic" action="show" id="${l.get(0)}">${l.get(1)}</g:link>
                                 <br>
                                 <span>${l.get(2)}</span>
-                            <%
-
-                            %>
+                              <br>
                             </g:each>
                         </p>
                     </div>
                     <div id="tabs-2">
                         <p>
-                            Second Contents
-                            ---------------------------------------------------------------------
+                            <ls:topResource/>
                         </p>
                     </div>
                     <div id="tabs-3">

@@ -106,6 +106,13 @@ class SubscriptionController {
 //        s.subscriber=User.load(session.user.id)
         println "deepak---------"+s.validate()
         s.save(failOnError: true)
+        List<Resource> res = Resource.findAllByTopic(Topic.load(params.topic))
+        ReadingItem readingItem
+        res.each {
+            readingItem = new ReadingItem(isFavourite: false, isRead: false,resource: Resource.load(it.id),user: User.load(session.user.id))
+            readingItem.save(failOnError: true)
+        }
+        ReadingItem
         redirect(controller: 'user', action: 'dashBoard')
     }
 
