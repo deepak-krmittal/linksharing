@@ -234,7 +234,8 @@
 
         </div>
         <div id="invitation">
-            <g:form>
+            <g:form controller="misc" action="sendInvite">
+                <g:hiddenField name="topic" value="${topicInstance?.id}"></g:hiddenField>
                 E-Mail Id: <g:textField name="email"></g:textField>
                 <br>
                 <g:submitButton name="Send Invite" value="Send Invite"></g:submitButton>

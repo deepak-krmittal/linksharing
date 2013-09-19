@@ -10,7 +10,7 @@ class BootStrap {
             new User(email:"dkmittal22${it}@gmail.com",gender: 'Male',firstName: "Deepak",lastName: "Mittal",dob: new Date(),password: '12345').save()
         }
 
-
+        new User(email:'tushar.saxena@intelligrape.com',gender: 'Male',firstName: 'Tushar',lastName: 'Saxena',dateOfBirth: new Date(),password: '12345').save()
         int value=1
 
         10.times {

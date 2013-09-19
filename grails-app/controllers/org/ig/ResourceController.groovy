@@ -140,7 +140,7 @@ class ResourceController {
             r.save(failOnError: true)
 //            render "Document uploaded succsessfully"
         }
-        flash.id=params.topic
-        redirect(controller: 'topic', action: 'show')
+        flash.message="Resource added successfully"
+        redirect(controller: 'topic', action: 'show', params: ['id':params.topic])
     }
 }

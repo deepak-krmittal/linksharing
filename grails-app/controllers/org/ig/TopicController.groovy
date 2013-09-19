@@ -12,11 +12,17 @@ class TopicController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count()]
+        if(!params.offset){
+            params.offset=0
+        }
+        List<Topic> topic = Topic.findAll("from Topic as t where t.visibility=?",['public'],[max:params.max, offset:params.offset])
+//        [topicInstanceList: Topic.list(params), topicInstanceTotal: Topic.count()]
+        [topicInstanceList: topic, topicInstanceTotal:Topic.count]
     }
 
     def create() {
         [topicInstance: new Topic(params)]
+
     }
 
     def save() {
@@ -28,7 +34,10 @@ class TopicController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
-        redirect(action: "show", id: topicInstance.id)
+//        redirect(action: "show", id: topicInstance.id)
+//        params.seriousness="serious"
+//        params.topic=topicInstance.id
+        redirect(controller: 'subscription', action: 'subscriber', params: ['seriousness':'serious','topic':topicInstance.id])
     }
 
     def show(Long id) {
